@@ -1,3 +1,3 @@
 module.exports = {
-  uri: 'mongodb://localhost:27017/gonode-marketplace'
+  uri: process.env.MONGO_DB_URL
 }
