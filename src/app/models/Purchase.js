@@ -21,4 +21,4 @@ const PurchaseSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Ad', PurchaseSchema)
+module.exports = mongoose.model('Purchase', PurchaseSchema)

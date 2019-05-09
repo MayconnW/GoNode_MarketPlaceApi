@@ -6,20 +6,34 @@ const Queue = require('../services/Queue')
 
 class PurchaseController {
   async store (req, res) {
-    const { ad, content } = req.body
+    const { ad: adId, content } = req.body
 
-    const purchaseAd = await Ad.findById(ad).populate('author')
+    const ad = await Ad.findById(adId).populate('author')
     const user = await User.findById(req.userId)
 
-    await Purchase.create({ ...req.body, buyer: req.userId })
+    const purchase = await Purchase.create({ ...req.body, buyer: req.userId })
 
     Queue.create(PurchaseMail.key, {
-      ad: purchaseAd,
+      ad,
       user,
       content
     }).save()
 
-    return res.send()
+    return res.json(purchase)
+  }
+
+  async sell (req, res) {
+    const purchase = await Purchase.findById(req.params.id)
+
+    await Ad.findOneAndUpdate(
+      { id: purchase.ad },
+      {
+        available: false,
+        purchaseBy: purchase.id
+      },
+      { new: true }
+    )
+    res.json({ message: 'Success' })
   }
 }
 

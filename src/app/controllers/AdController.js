@@ -2,7 +2,7 @@ const Ad = require('../models/Ad')
 
 class AdController {
   async index (req, res) {
-    const filters = {}
+    const filters = { available: true }
 
     if (req.query.price_max || req.query.price_min) {
       filters.price = {}
@@ -37,7 +37,11 @@ class AdController {
   }
 
   async store (req, res) {
-    const ad = await Ad.create({ ...req.body, author: req.userId })
+    const ad = await Ad.create({
+      ...req.body,
+      author: req.userId,
+      available: true
+    })
 
     return res.json(ad)
   }

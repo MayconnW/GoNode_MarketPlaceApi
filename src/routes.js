@@ -41,4 +41,6 @@ routes.post(
   controllers.PurchaseController.store
 )
 
+routes.post('/purchases/:id/sell', controllers.PurchaseController.sell)
+
 module.exports = routes
