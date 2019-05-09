@@ -1,5 +1,7 @@
 # Bootcamp GoStack-6 - Desafio 03
 
+![GitHub tag (latest by date)](https://img.shields.io/github/tag-date/MayconnW/GoNode_MarketPlaceApi.svg?style=for-the-badge)
+
 ## Sobre o Desafio
 
 Criar uma api usando NODE e Express.
